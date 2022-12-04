@@ -8,10 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="backuper.db" />
     <None Remove="Images\Icon awesome-folder.png" />
     <None Remove="Images\Icon awesome-lock.png" />
     <None Remove="Images\Icon feather-delete.png" />
     <None Remove="Images\logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="backuper.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

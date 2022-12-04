@@ -41,10 +41,12 @@ namespace Main
                 {
                     if (!IsExecuting.ContainsKey(plan))
                         IsExecuting.Add(plan, false);
-
-                    if (IsExecuting[plan] == false)
+                    else
                     {
-                        new Thread(() => RunBackup(plan)).Start();
+                        if (IsExecuting[plan] == false)
+                        {
+                            new Thread(() => RunBackup(plan)).Start();
+                        }
                     }
                 }
             }

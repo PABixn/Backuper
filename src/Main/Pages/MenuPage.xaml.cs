@@ -99,14 +99,8 @@ namespace Main.Pages
             {
                 string planName = ((Plan)PlansList.SelectedItem)?.PlanName ?? ((Plan)PlansList.Items[0]).PlanName;
 
-                try
-                {
-                    UpdateUI(DB.GetLastDate(planName), DB.GetInterval(planName), PlanHandler.IsExecuting[planName]);
-                }
-                catch(Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+                if(PlanHandler.IsExecuting.ContainsKey(planName))
+                UpdateUI(DB.GetLastDate(planName), DB.GetInterval(planName), PlanHandler.IsExecuting[planName]);
             });
         }
 
