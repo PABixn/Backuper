@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -30,7 +31,7 @@ namespace Main.Pages
             (List<string> plans, List<DateTime> lastDates, List<TimeSpan> intervals) = DB.GetAll();
 
             for (int i = 0; i < plans.Count; i++)
-                PlansList.Items.Add(new Plan { PlanName = plans[i], NextBackup = "Next backup: " + GetNextBackupDate(lastDates[i], intervals[i]).ToString() });
+                PlansList.Items.Add(new Plan { PlanName = plans[i], NextBackup = "Next backup: " + GetNextBackupDate(lastDates[i], intervals[i]).ToLocalTime().ToString(CultureInfo.InstalledUICulture) });
 
             System.Timers.Timer timer = new System.Timers.Timer(1000);
 
@@ -60,9 +61,9 @@ namespace Main.Pages
             foreach (string folder in destinationFolders)
                 DestinationFoldersTextBlock.Text += folder + "   ";
 
-            LastBackupTextBlock.Text = "Last backup: " + DB.GetLastDate(planName).ToLocalTime();
+            LastBackupTextBlock.Text = "Last backup: " + DB.GetLastDate(planName).ToLocalTime().ToString(CultureInfo.InstalledUICulture);
 
-            NextBackupTextBlock.Text = "Next backup: " + GetNextBackupDate(DB.GetLastDate(planName), interval).ToLocalTime();
+            NextBackupTextBlock.Text = "Next backup: " + GetNextBackupDate(DB.GetLastDate(planName), interval).ToLocalTime().ToString(CultureInfo.InstalledUICulture);
 
             HideAll.Visibility = Visibility.Hidden;
         }
@@ -74,10 +75,10 @@ namespace Main.Pages
                 LastBackupTextBlock.Text = "";
                 NextBackupTextBlock.Text = "";
 
-                LastBackupTextBlock.Text = "Last backup: " + lastDate.ToLocalTime();
+                LastBackupTextBlock.Text = "Last backup: " + lastDate.ToLocalTime().ToString(CultureInfo.InstalledUICulture);
 
                 if (executing == false)
-                    NextBackupTextBlock.Text = "Next backup: " + GetNextBackupDate(lastDate, interval).ToLocalTime();
+                    NextBackupTextBlock.Text = "Next backup: " + GetNextBackupDate(lastDate, interval).ToLocalTime().ToString(CultureInfo.InstalledUICulture);
                 else
                     NextBackupTextBlock.Text = "Executing now";
 
@@ -88,7 +89,7 @@ namespace Main.Pages
                     if (PlanHandler.IsExecuting[plans[i]] == true)
                         PlansList.Items[i] = new Plan { PlanName = plans[i], NextBackup = "Executing" };
                     else
-                        PlansList.Items[i] = new Plan { PlanName = plans[i], NextBackup = "Next backup: " + GetNextBackupDate(lastDates[i], intervals[i]).ToLocalTime() };
+                        PlansList.Items[i] = new Plan { PlanName = plans[i], NextBackup = "Next backup: " + GetNextBackupDate(lastDates[i], intervals[i]).ToLocalTime().ToString(CultureInfo.InstalledUICulture) };
                 }
             });
         }
@@ -100,7 +101,7 @@ namespace Main.Pages
                 string planName = ((Plan)PlansList.SelectedItem)?.PlanName ?? ((Plan)PlansList.Items[0]).PlanName;
 
                 if(PlanHandler.IsExecuting.ContainsKey(planName))
-                UpdateUI(DB.GetLastDate(planName), DB.GetInterval(planName), PlanHandler.IsExecuting[planName]);
+                    UpdateUI(DB.GetLastDate(planName), DB.GetInterval(planName), PlanHandler.IsExecuting[planName]);
             });
         }
 

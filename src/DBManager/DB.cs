@@ -106,7 +106,6 @@ namespace DBManager
         public static DateTime GetModifyDate(string planName, string filePath)
         {
             CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
-            CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
 
             SQLiteConnection conn = new SQLiteConnection(Connect());
 
@@ -125,7 +124,6 @@ namespace DBManager
         public static DateTime GetLastDate(string planName)
         {
             CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
-            CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
 
             SQLiteConnection conn = new SQLiteConnection(Connect());
 

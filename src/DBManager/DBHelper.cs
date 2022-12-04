@@ -59,7 +59,6 @@ namespace DBManager
         public static List<DateTime> ToDateTimes(List<string> dates)
         {
             CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
-            CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
 
             List<DateTime> result = new List<DateTime>();
 

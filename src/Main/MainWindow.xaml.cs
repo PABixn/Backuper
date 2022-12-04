@@ -31,7 +31,6 @@ namespace Main
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
-            CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
 
             if (DB.GetAllPlans().Count == 0)
             {
