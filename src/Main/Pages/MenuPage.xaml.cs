@@ -60,9 +60,9 @@ namespace Main.Pages
             foreach (string folder in destinationFolders)
                 DestinationFoldersTextBlock.Text += folder + "   ";
 
-            LastBackupTextBlock.Text = "Last backup: " + DB.GetLastDate(planName);
+            LastBackupTextBlock.Text = "Last backup: " + DB.GetLastDate(planName).ToLocalTime();
 
-            NextBackupTextBlock.Text = "Next backup: " + GetNextBackupDate(DB.GetLastDate(planName), interval);
+            NextBackupTextBlock.Text = "Next backup: " + GetNextBackupDate(DB.GetLastDate(planName), interval).ToLocalTime();
 
             HideAll.Visibility = Visibility.Hidden;
         }
@@ -74,10 +74,10 @@ namespace Main.Pages
                 LastBackupTextBlock.Text = "";
                 NextBackupTextBlock.Text = "";
 
-                LastBackupTextBlock.Text = "Last backup: " + lastDate;
+                LastBackupTextBlock.Text = "Last backup: " + lastDate.ToLocalTime();
 
                 if (executing == false)
-                    NextBackupTextBlock.Text = "Next backup: " + GetNextBackupDate(lastDate, interval);
+                    NextBackupTextBlock.Text = "Next backup: " + GetNextBackupDate(lastDate, interval).ToLocalTime();
                 else
                     NextBackupTextBlock.Text = "Executing now";
 
@@ -88,7 +88,7 @@ namespace Main.Pages
                     if (PlanHandler.IsExecuting[plans[i]] == true)
                         PlansList.Items[i] = new Plan { PlanName = plans[i], NextBackup = "Executing" };
                     else
-                        PlansList.Items[i] = new Plan { PlanName = plans[i], NextBackup = "Next backup: " + GetNextBackupDate(lastDates[i], intervals[i]).ToString() };
+                        PlansList.Items[i] = new Plan { PlanName = plans[i], NextBackup = "Next backup: " + GetNextBackupDate(lastDates[i], intervals[i]).ToLocalTime() };
                 }
             });
         }
@@ -129,15 +129,17 @@ namespace Main.Pages
         {
             string plan = ((Plan)PlansList.SelectedItem ?? (Plan)PlansList.Items[0]).PlanName;
 
-
-            if (PlanHandler.IsExecuting[plan] == false)
+            if (PlanHandler.IsExecuting.ContainsKey(plan))
             {
-                PlanExecutingTextBlock.Visibility = Visibility.Hidden;
-                new Thread(() => PlanHandler.RunBackup(plan)).Start();
-            }
-            else
-            {
-                PlanExecutingTextBlock.Visibility = Visibility.Visible;
+                if (PlanHandler.IsExecuting[plan] == false)
+                {
+                    PlanExecutingTextBlock.Visibility = Visibility.Hidden;
+                    new Thread(() => PlanHandler.RunBackup(plan)).Start();
+                }
+                else
+                {
+                    PlanExecutingTextBlock.Visibility = Visibility.Visible;
+                }
             }
         }
     }
