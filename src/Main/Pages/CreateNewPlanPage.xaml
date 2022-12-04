@@ -1,0 +1,76 @@
+﻿<Page x:Class="Main.Pages.CreateNewPlanPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Main.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1280"
+      Title="CreateNewPlanPage" Background="#E5E5E5">
+
+    <Page.Resources>
+
+        <ControlTemplate x:Key="Blue" TargetType="{x:Type ButtonBase}">
+            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" TargetName="border" Value="#34D5FE"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="Base" TargetType="{x:Type ButtonBase}">
+            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" TargetName="border" Value="#E5E5E5"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+    </Page.Resources>
+
+
+
+
+    <Grid>
+        <Rectangle HorizontalAlignment="Center" Height="73" VerticalAlignment="Top" Width="1280" Fill="White"/>
+        <Image HorizontalAlignment="Left" Height="48" Margin="10,15,0,0" VerticalAlignment="Top" Width="170" Source="/Images/logo.png"/>
+
+        <Button Template="{DynamicResource Base}" x:Name="NewPlan" Content="New plan" HorizontalAlignment="Left" Margin="335,0,0,0" VerticalAlignment="Top" Width="163" Height="73" FontFamily="Poppins" FontWeight="Bold" Padding="0,0,0,0" ScrollViewer.CanContentScroll="True" Background="#FFFFFF" BorderThickness="0,0,0,0" FontSize="20"/>
+        <Button Template="{DynamicResource Base}" x:Name="ImportPlan" Content="Import plan" HorizontalAlignment="Left" Margin="498,0,0,0" VerticalAlignment="Top" Width="187" Height="73" FontFamily="Poppins" FontWeight="Normal" Padding="0,0,0,0" ScrollViewer.CanContentScroll="True" Background="#FFFFFF" BorderThickness="0,0,0,0" FontSize="20"/>
+        <Button Template="{DynamicResource Base}" x:Name="Restore" Content="Restore" HorizontalAlignment="Left" Margin="685,0,0,0" VerticalAlignment="Top" Width="145" Height="73" FontFamily="Poppins" FontWeight="Normal" Padding="0,0,0,0" ScrollViewer.CanContentScroll="True" Background="#FFFFFF" BorderThickness="0,0,0,0" FontSize="20"/>
+        <Rectangle HorizontalAlignment="Center" Height="73" VerticalAlignment="Bottom" Width="1280" Fill="#242B2E" Margin="0,0,0,0"/>
+        <TextBlock Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,24" TextWrapping="Wrap" Text="All Rights Reserved © 2022 Backuper" VerticalAlignment="Bottom" FontFamily="Poppins" FontWeight="Bold" FontSize="18"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,127,0,0" TextWrapping="Wrap" Text="Create new plan" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="Bold" FontSize="30"/>
+        <TextBox x:Name="PlanNameTextBox" Text="Name your plan" HorizontalAlignment="Center" Margin="0,201,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="252" Height="37" BorderBrush="#707070" FontFamily="Poppins" FontWeight="Bold" FontSize="14" TextAlignment="Left" Padding="7,7,0,0" Foreground="#FF707070" GotKeyboardFocus="PlanNameTextBox_GotKeyboardFocus" LostKeyboardFocus="PlanNameTextBox_LostKeyboardFocus">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox x:Name="DescriptionTextBox" Text="Description" HorizontalAlignment="Center" Margin="0,269,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="252" Height="141" BorderBrush="#707070" FontFamily="Poppins" FontWeight="Bold" FontSize="14" TextAlignment="Left" Padding="7,7,0,0" Foreground="#FF707070" LostKeyboardFocus="DescriptionTextBox_LostKeyboardFocus" GotKeyboardFocus="DescriptionTextBox_GotKeyboardFocus">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+
+        <Button Template="{DynamicResource Blue}" x:Name="SubmitButton" Content="Submit" HorizontalAlignment="Center" Margin="0,441,0,0" VerticalAlignment="Top" Height="40" Width="104" FontFamily="Roboto" FontWeight="Bold" FontSize="20" Background="#FF23C4ED" Padding="0,0,0,0" BorderThickness="0,0,0,0" Foreground="White" Click="SubmitButton_Click">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="14"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <TextBlock x:Name="PlanExistsTextBlock" Visibility="Hidden" HorizontalAlignment="Center" Margin="0,503,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Poppins" FontSize="16" TextAlignment="Center" FontWeight="Bold" Foreground="Red"><Run Text="Plan with this name already exists."/><LineBreak/><Run Text="Please choose a different one."/></TextBlock>
+
+    </Grid>
+</Page>

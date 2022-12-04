@@ -1,0 +1,69 @@
+﻿<Page x:Class="Main.Pages.MenuNoPlansPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Main.Properties"
+      Height="720" Width="1280"
+      Title="MenuNoPlansPage" Background="#E5E5E5">
+
+    <Page.Resources>
+
+        <ControlTemplate x:Key="Blue" TargetType="{x:Type ButtonBase}">
+            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" TargetName="border" Value="#34D5FE"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="Base" TargetType="{x:Type ButtonBase}">
+            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" TargetName="border" Value="#E5E5E5"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+    </Page.Resources>
+
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="407*"/>
+            <RowDefinition Height="313*"/>
+        </Grid.RowDefinitions>
+        <Rectangle HorizontalAlignment="Center" Height="73" VerticalAlignment="Top" Width="1280" Fill="White"/>
+        <Image HorizontalAlignment="Left" Height="48" Margin="10,15,0,0" VerticalAlignment="Top" Width="170" Source="/Images/logo.png"/>
+
+        <Button Template="{DynamicResource Base}" x:Name="NewPlan" Content="New plan" HorizontalAlignment="Left" Margin="335,0,0,0" VerticalAlignment="Top" Width="163" Height="73" FontFamily="Poppins" FontWeight="Normal" Padding="0,0,0,0" ScrollViewer.CanContentScroll="True" Background="#FFFFFF" BorderThickness="0,0,0,0" FontSize="20" Click="NewPlan_Click"/>
+        <Button Template="{DynamicResource Base}" x:Name="ImportPlan" Content="Import plan" HorizontalAlignment="Left" Margin="498,0,0,0" VerticalAlignment="Top" Width="187" Height="73" FontFamily="Poppins" FontWeight="Normal" Padding="0,0,0,0" ScrollViewer.CanContentScroll="True" Background="#FFFFFF" BorderThickness="0,0,0,0" FontSize="20"/>
+        <Button Template="{DynamicResource Base}" x:Name="Restore" Content="Restore" HorizontalAlignment="Left" Margin="685,0,0,0" VerticalAlignment="Top" Width="145" Height="73" FontFamily="Poppins" FontWeight="Normal" Padding="0,0,0,0" ScrollViewer.CanContentScroll="True" Background="#FFFFFF" BorderThickness="0,0,0,0" FontSize="20"/>
+
+        <TextBlock HorizontalAlignment="Center" Margin="0,247,0,0" TextWrapping="Wrap" Text="Welcome to Backuper!" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="Bold" FontSize="30"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,298,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="450" TextAlignment="Center" FontFamily="Roboto" FontSize="17" FontWeight="Normal"><Run Language="pl-pl" Text="No plans were found in the default directory."/><LineBreak/><Run Language="pl-pl" Text="Create new one or import from file to start using Backuper."/></TextBlock>
+        <Button Template="{DynamicResource Blue}" x:Name="CreateNewPlanButton" Content="Create new plan" HorizontalAlignment="Left" Margin="435,388,0,0" VerticalAlignment="Top" Height="40" Width="184" FontFamily="Roboto" FontWeight="Bold" FontSize="20" Background="#FF23C4ED" Padding="0,0,0,0" BorderThickness="0,0,0,0" Foreground="White" Click="CreateNewPlanButton_Click" Grid.RowSpan="2">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="14"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button Template="{DynamicResource Blue}" Content="Import from file" HorizontalAlignment="Right" Margin="0,388,435,0" VerticalAlignment="Top" Height="40" Width="182" FontFamily="Roboto" FontWeight="Bold" FontSize="20" Background="#FF23C4ED" Padding="0,0,0,0" BorderThickness="0,0,0,0" Foreground="White" Grid.RowSpan="2">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="14"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Rectangle StrokeThickness="0" HorizontalAlignment="Center" Height="73" VerticalAlignment="Top" Width="1280" Fill="#242B2E" Margin="0,240,0,0" Grid.Row="1"/>
+        <TextBlock Foreground="White" HorizontalAlignment="Center" Margin="0,262,0,0" TextWrapping="Wrap" Text="All Rights Reserved © 2022 Backuper" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="Bold" FontSize="18" Grid.Row="1"/>
+    </Grid>
+</Page>

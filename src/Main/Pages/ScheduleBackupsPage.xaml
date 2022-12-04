@@ -1,0 +1,123 @@
+﻿<Page x:Class="Main.Pages.ScheduleBackupsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Main"
+      mc:Ignorable="d" 
+      Height="720" Width="1280"
+      Title="ScheduleBackupsPage" Background="#E5E5E5">
+
+    <Page.Resources>
+
+        <ControlTemplate x:Key="Blue" TargetType="{x:Type ButtonBase}">
+            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" TargetName="border" Value="#34D5FE"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="Base" TargetType="{x:Type ButtonBase}">
+            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" TargetName="border" Value="#E5E5E5"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+    </Page.Resources>
+
+
+
+    <Grid>
+        <Rectangle HorizontalAlignment="Center" Height="73" VerticalAlignment="Top" Width="1280" Fill="White"/>
+        <Image HorizontalAlignment="Left" Height="48" Margin="10,15,0,0" VerticalAlignment="Top" Width="170" Source="/Images/logo.png"/>
+
+        <Button Template="{DynamicResource Base}" x:Name="NewPlan" Content="New plan" HorizontalAlignment="Left" Margin="335,0,0,0" VerticalAlignment="Top" Width="163" Height="73" FontFamily="Poppins" FontWeight="Bold" Padding="0,0,0,0" ScrollViewer.CanContentScroll="True" Background="#FFFFFF" BorderThickness="0,0,0,0" FontSize="20"/>
+        <Button Template="{DynamicResource Base}" x:Name="ImportPlan" Content="Import plan" HorizontalAlignment="Left" Margin="498,0,0,0" VerticalAlignment="Top" Width="187" Height="73" FontFamily="Poppins" FontWeight="Normal" Padding="0,0,0,0" ScrollViewer.CanContentScroll="True" Background="#FFFFFF" BorderThickness="0,0,0,0" FontSize="20"/>
+        <Button Template="{DynamicResource Base}" x:Name="Restore" Content="Restore" HorizontalAlignment="Left" Margin="685,0,0,0" VerticalAlignment="Top" Width="145" Height="73" FontFamily="Poppins" FontWeight="Normal" Padding="0,0,0,0" ScrollViewer.CanContentScroll="True" Background="#FFFFFF" BorderThickness="0,0,0,0" FontSize="20"/>
+        <Rectangle HorizontalAlignment="Center" Height="73" VerticalAlignment="Bottom" Width="1280" Fill="#242B2E" Margin="0,0,0,0"/>
+        <TextBlock Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,24" TextWrapping="Wrap" Text="All Rights Reserved © 2022 Backuper" VerticalAlignment="Bottom" FontFamily="Poppins" FontWeight="Bold" FontSize="18"/>
+
+        <TextBlock HorizontalAlignment="Center" Margin="0,134,0,0" TextWrapping="Wrap" Text="Schedule backups" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="Bold" FontSize="30"/>
+
+        <Button x:Name="SubmitButton" Template="{DynamicResource Blue}" Content="Submit" HorizontalAlignment="Center" Margin="0,531,0,0" VerticalAlignment="Top" Height="40" Width="104" FontFamily="Roboto" FontWeight="Bold" FontSize="20" Background="#FF23C4ED" Padding="0,0,0,0" BorderThickness="0,0,0,0" Foreground="White" RenderTransformOrigin="0.529,0.8" Click="SubmitButton_Click">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="14"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+
+        <CheckBox x:Name="RunAutoCheckBox" IsChecked="True" Content="Run bakups automatically" HorizontalAlignment="Left" Margin="498,200,0,0" VerticalAlignment="Top" FontFamily="Poppins" Click="RunAutoCheckBox_Click">
+            <CheckBox.LayoutTransform>
+                <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
+            </CheckBox.LayoutTransform>
+        </CheckBox>
+        <TextBlock HorizontalAlignment="Left" Margin="489,260,0,0" TextWrapping="Wrap" Text="Run again every" VerticalAlignment="Top" FontSize="15" FontFamily="Poppins"/>
+        <TextBox x:Name="IntervalValue" MaxLength="7" HorizontalAlignment="Left" Margin="619,256,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="74" Height="25" FontFamily="Poppins" FontSize="14" Padding="2,2,0,0" PreviewTextInput="IntervalValue_PreviewTextInput"/>
+        <ComboBox SelectedValuePath="Content" x:Name="IntervalUnit" HorizontalAlignment="Left" Margin="699,256,0,0" VerticalAlignment="Top" Width="76" Height="25" FontFamily="Poppins" Padding="6,4,5,3">
+            <ComboBoxItem>Minutes</ComboBoxItem>
+            <ComboBoxItem>Hours</ComboBoxItem>
+            <ComboBoxItem IsSelected="True">Days</ComboBoxItem>
+            <ComboBoxItem>Weeks</ComboBoxItem>
+            <ComboBoxItem>Months</ComboBoxItem>
+            <ComboBoxItem>Years</ComboBoxItem>
+        </ComboBox>
+
+        <TextBlock HorizontalAlignment="Left" Margin="489,301,0,0" TextWrapping="Wrap" Text="Allowed days" VerticalAlignment="Top" FontSize="15" FontFamily="Poppins"/>
+
+        <CheckBox x:Name="AllowMonday" IsChecked="True" Content="Monday" HorizontalAlignment="Left" Margin="489,332,0,0" VerticalAlignment="Top">
+            <CheckBox.LayoutTransform>
+                <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
+            </CheckBox.LayoutTransform>
+        </CheckBox>
+
+        <CheckBox x:Name="AllowTuesday" IsChecked="True" Content="Tuesday" HorizontalAlignment="Left" Margin="489,357,0,0" VerticalAlignment="Top">
+            <CheckBox.LayoutTransform>
+                <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
+            </CheckBox.LayoutTransform>
+        </CheckBox>
+
+        <CheckBox x:Name="AllowWednesday" IsChecked="True" Content="Wednesday" HorizontalAlignment="Left" Margin="489,382,0,0" VerticalAlignment="Top">
+            <CheckBox.LayoutTransform>
+                <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
+            </CheckBox.LayoutTransform>
+        </CheckBox>
+
+        <CheckBox x:Name="AllowThursday" IsChecked="True" Content="Thursday" HorizontalAlignment="Left" Margin="489,407,0,0" VerticalAlignment="Top">
+            <CheckBox.LayoutTransform>
+                <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
+            </CheckBox.LayoutTransform>
+        </CheckBox>
+
+        <CheckBox x:Name="AllowFriday" IsChecked="True" Content="Friday" HorizontalAlignment="Left" Margin="489,432,0,0" VerticalAlignment="Top">
+            <CheckBox.LayoutTransform>
+                <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
+            </CheckBox.LayoutTransform>
+        </CheckBox>
+
+        <CheckBox x:Name="AllowSaturday" IsChecked="True" Content="Saturday" HorizontalAlignment="Left" Margin="489,457,0,0" VerticalAlignment="Top">
+            <CheckBox.LayoutTransform>
+                <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
+            </CheckBox.LayoutTransform>
+        </CheckBox>
+
+        <CheckBox x:Name="AllowSunday" IsChecked="True" Content="Sunday" HorizontalAlignment="Left" Margin="489,482,0,0" VerticalAlignment="Top">
+            <CheckBox.LayoutTransform>
+                <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
+            </CheckBox.LayoutTransform>
+        </CheckBox>
+
+        <Rectangle Visibility="Hidden" x:Name="HideOptionsPanel" StrokeThickness="0" HorizontalAlignment="Left" Height="273" Margin="398,240,0,0" Stroke="Black" VerticalAlignment="Top" Width="546" Fill="#FFE5E5E5"/>
+
+    </Grid>
+</Page>

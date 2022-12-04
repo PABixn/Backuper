@@ -1,0 +1,11 @@
+﻿<Window x:Class="Main.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Main"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="756" Width="1296" MaxWidth="1296" MaxHeight="756" MinHeight="756" MinWidth="1296" Background="#E5E5E5" Loaded="Window_Loaded">
+
+    <Frame Width="1280" Height="720" VerticalAlignment="Center" x:Name="MainFrame" x:FieldModifier="public" NavigationUIVisibility="Hidden" Margin="0,0,0,0"/>
+</Window>
