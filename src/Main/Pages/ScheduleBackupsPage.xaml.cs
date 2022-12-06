@@ -89,5 +89,10 @@ namespace Main.Pages
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
+
+        private void GoBackButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            this.NavigationService.Navigate(new AddDestinationFoldersPage());
+        }
     }
 }

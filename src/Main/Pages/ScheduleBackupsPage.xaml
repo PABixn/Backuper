@@ -48,6 +48,10 @@
 
         <TextBlock HorizontalAlignment="Center" Margin="0,134,0,0" TextWrapping="Wrap" Text="Schedule backups" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="Bold" FontSize="30"/>
 
+        <StackPanel x:Name="GoBackButton" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{DynamicResource GoBackButtonStyle}" Height="30" Width="50" Margin="1226,78,0,0"  MouseLeftButtonUp="GoBackButton_MouseLeftButtonUp">
+            <Image Height="30" Source="/Images/Icon feather-delete.png"/>
+        </StackPanel>
+        
         <Button x:Name="SubmitButton" Template="{DynamicResource Blue}" Content="Submit" HorizontalAlignment="Center" Margin="0,531,0,0" VerticalAlignment="Top" Height="40" Width="104" FontFamily="Roboto" FontWeight="Bold" FontSize="20" Background="#FF23C4ED" Padding="0,0,0,0" BorderThickness="0,0,0,0" Foreground="White" RenderTransformOrigin="0.529,0.8" Click="SubmitButton_Click">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">

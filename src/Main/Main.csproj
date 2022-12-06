@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Pages\Icon feather-delete.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <COMReference Include="{215d64d2-031c-33c7-96e3-61794cd1ee61}">
       <WrapperTool>tlbimp</WrapperTool>
       <VersionMinor>4</VersionMinor>
@@ -25,6 +29,10 @@
   <ItemGroup>
     <ProjectReference Include="..\BackupManager\BackupManager.csproj" />
     <ProjectReference Include="..\DBManager\DBManager.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Pages\Icon feather-delete.png" />
   </ItemGroup>
 
   <ItemGroup>

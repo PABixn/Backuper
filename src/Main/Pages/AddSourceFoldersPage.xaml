@@ -21,7 +21,6 @@
             </ControlTemplate.Triggers>
         </ControlTemplate>
 
-
         <ControlTemplate x:Key="Blue" TargetType="{x:Type ButtonBase}">
             <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
                 <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
@@ -56,6 +55,17 @@
             </Style.Triggers>
         </Style>
 
+        <Style x:Key="GoBackButtonStyle" TargetType="{x:Type StackPanel}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="1"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="False">
+                    <Setter Property="Opacity" Value="0.8" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
     </Page.Resources>
 
 
@@ -71,6 +81,10 @@
         <Rectangle Fill="#242B2E" Margin="0,0,0,0" Height="73" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="1280"/>
         <TextBlock Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,24" TextWrapping="Wrap" Text="All Rights Reserved © 2022 Backuper" VerticalAlignment="Bottom" FontFamily="Poppins" FontWeight="Bold" FontSize="18"/>
         <TextBlock HorizontalAlignment="Center" Margin="0,103,0,0" TextWrapping="Wrap" Text="Add source folders" VerticalAlignment="Top" FontFamily="Poppins" FontWeight="Bold" FontSize="30"/>
+
+        <StackPanel x:Name="GoBackButton" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{DynamicResource GoBackButtonStyle}" Height="30" Width="50" Margin="1226,78,0,0"  MouseLeftButtonUp="GoBackButton_MouseLeftButtonUp">
+            <Image Height="30" Source="/Images/Icon feather-delete.png"/>
+        </StackPanel>
 
         <Button x:Name="SubmitButton" Template="{DynamicResource Blue}" Content="Submit" HorizontalAlignment="Center" Margin="0,525,0,0" VerticalAlignment="Top" Height="40" Width="104" FontFamily="Roboto" FontWeight="Bold" FontSize="20" Background="#FF23C4ED" Padding="0,0,0,0" BorderThickness="0,0,0,0" Foreground="White" Click="SubmitButton_Click">
             <Button.Resources>

@@ -26,6 +26,12 @@ namespace Main.Pages
         public CreateNewPlanPage()
         {
             InitializeComponent();
+
+            if(planName != "")
+                PlanNameTextBox.Text = planName;
+
+            if(planDescription != "")
+                DescriptionTextBox.Text = planDescription;
         }
 
         private void PlanNameTextBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)

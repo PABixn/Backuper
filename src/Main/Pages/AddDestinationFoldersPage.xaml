@@ -80,7 +80,9 @@
             </Button.Resources>
         </Button>
 
-
+        <StackPanel x:Name="GoBackButton" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{DynamicResource GoBackButtonStyle}" Height="30" Width="50" Margin="1226,78,0,0"  MouseLeftButtonUp="GoBackButton_MouseLeftButtonUp">
+            <Image Height="30" Source="/Images/Icon feather-delete.png"/>
+        </StackPanel>
 
         <Rectangle RadiusX="20" RadiusY="20" HorizontalAlignment="Center" Height="332" Stroke="Black" VerticalAlignment="Top" Width="310" StrokeThickness="0" Fill="White" Margin="0,168,0,0"/>
 

@@ -28,6 +28,14 @@ namespace Main.Pages
         public AddDestinationFoldersPage()
         {
             InitializeComponent();
+
+            if (destinationFolders.Count > 0)
+            {
+                foreach (string s in destinationFolders)
+                {
+                    DestinationFoldersList.Items.Add(s);
+                }
+            }
         }
 
         private void DeleteSourceFolderButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -61,6 +69,11 @@ namespace Main.Pages
                     }
                 }
             }
+        }
+
+        private void GoBackButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            this.NavigationService.Navigate(new AddSourceFoldersPage());
         }
     }
 }
