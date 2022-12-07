@@ -141,7 +141,7 @@ namespace DBManager
 
         private static string Connect()
         {
-            return ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
+            return $"Data Source={Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Backuper\backuper.db"};Version=3;";
         }
     }
 }
