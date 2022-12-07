@@ -54,7 +54,9 @@ namespace LaunchApp
             RegistryKey rk = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
 
             if (rk.GetValue("Backuper") == null)
-                rk.SetValue("Backuper", Application.ExecutablePath);
+                rk.SetValue("Backuper", "\"" + Application.ExecutablePath + "\"");
+            else if (rk.GetValue("Backuper") != "\"" + Application.ExecutablePath + "\"")
+                rk.SetValue("Backuper", "\"" + Application.ExecutablePath + "\"");
         }
 
         private void ShowApp(object sender, EventArgs e)
