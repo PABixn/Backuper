@@ -9,7 +9,7 @@
       Title="MenuPage" Background="#E5E5E5" Loaded="MenuPage1_Loaded">
 
     <Page.Resources>
-
+        
         <Style x:Key="ListViewDefault" TargetType="{x:Type StackPanel}">
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">

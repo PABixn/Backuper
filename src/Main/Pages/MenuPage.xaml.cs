@@ -8,18 +8,21 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DBManager;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Main.Pages
 {
-    public partial class MenuPage : Page
+    public partial class MenuPage : System.Windows.Controls.Page
     {
         public MenuPage()
         {

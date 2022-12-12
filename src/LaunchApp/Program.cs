@@ -47,6 +47,8 @@ namespace LaunchApp
             ni.ContextMenuStrip = new ContextMenuStrip();
             ni.ContextMenuStrip.Items.AddRange(new ToolStripItem[] { showApp, exitApp });
             ni.Visible = true;
+
+            ShowApp(null, EventArgs.Empty);
         }
 
         private void AddToAutostart()
