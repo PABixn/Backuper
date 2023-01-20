@@ -14,8 +14,8 @@ namespace BackupManager
             string extension = Path.GetExtension(filePath);
             filePath = RemoveExtension(filePath.Substring(Path.GetPathRoot(filePath).Length));
 
-            return destinationFolder + filePath + " (" + planName + "_" +
-                dt.ToString().Replace(' ', '_').Replace('.', '_').Replace(':', '_') + ")" + extension;
+            return destinationFolder + filePath + " (" + planName.Replace('/', '_').Replace('\\', '_') + "_" +
+                dt.ToString().Replace(' ', '_').Replace('.', '_').Replace(':', '_').Replace('/','_').Replace('\\','_') + ")" + extension;
         }
 
         private static string RemoveExtension(string filename)

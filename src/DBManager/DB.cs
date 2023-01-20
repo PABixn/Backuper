@@ -148,7 +148,8 @@ namespace DBManager
 
         private static string Connect()
         {
-            return $"Data Source={Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Backuper\backuper.db"};Version=3;";
+            //return $"Data Source={Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Backuper\backuper.db"};Version=3;";
+            return "Data Source=backuper.db;Version=3;";
         }
     }
 }
