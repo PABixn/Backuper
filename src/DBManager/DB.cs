@@ -121,6 +121,13 @@ namespace DBManager
             return TimeSpan.Parse(conn.Query<string>($"SELECT interval FROM Plans WHERE planName='{planName}'").FirstOrDefault());
         }
 
+        public static List<string> GetSourceFolders(string planName)
+        {
+            SQLiteConnection conn = new SQLiteConnection(Connect());
+
+            return conn.Query<string>($"SELECT sourceFolders FROM Plans WHERE planName='{planName}'").ToList();
+        }
+
         public static DateTime GetLastDate(string planName)
         {
             CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
