@@ -9,20 +9,18 @@
       Title="MenuPage" Background="#E5E5E5" Loaded="MenuPage1_Loaded">
 
     <Page.Resources>
+        <ControlTemplate x:Key="Gray" TargetType="{x:Type ListViewItem}">
+            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsSelected" Value="true">
+                    <Setter Property="Background" TargetName="border" Value="#A0A0A0"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
         
-        <Style x:Key="ListViewDefault" TargetType="{x:Type StackPanel}">
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#AAAAAA" />
-                </Trigger>
-                <Trigger Property="IsMouseOver" Value="False">
-                    <Setter Property="Background" Value="#FFCCCCCC" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-
-        <ControlTemplate x:Key="Blue" TargetType="{x:Type ButtonBase}">
+      <ControlTemplate x:Key="Blue" TargetType="{x:Type ButtonBase}">
             <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
                 <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
             </Border>
@@ -81,7 +79,7 @@
         <TextBlock x:Name="BackupSizeTextBlock" HorizontalAlignment="Right" Margin="0,439,132,0" TextWrapping="Wrap" Text="Backup size: 232.15 gb" VerticalAlignment="Top" FontFamily="Poppins" FontSize="15" Grid.Column="1"/>
         <TextBlock x:Name="LastBackupTextBlock" HorizontalAlignment="Right" Margin="0,621,10,0" TextWrapping="Wrap" Text="Last backup: 28.03.2022, 15:25" VerticalAlignment="Top" FontFamily="Poppins" FontSize="13" Grid.Column="1"/>
 
-        <ListView SelectionMode="Single"  HorizontalAlignment="Left" Padding="0" VirtualizingPanel.ScrollUnit="Pixel" VerticalAlignment="Center" x:Name="PlansList" Width="248" Height="572" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="#FFCCCCCC" d:ItemsSource="{d:SampleData ItemCount=15 }" Grid.ColumnSpan="2">
+        <ListView SelectionMode="Single" HorizontalAlignment="Left" Padding="0" VirtualizingPanel.ScrollUnit="Pixel" VerticalAlignment="Center" x:Name="PlansList" Width="248" Height="572" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="#FFCCCCCC" d:ItemsSource="{d:SampleData ItemCount=15 }" Grid.ColumnSpan="2" SelectedIndex="0">
 
             <ListView.ItemContainerStyle>
 
@@ -89,7 +87,9 @@
                     <Setter Property="Padding" Value="0"/>
                     <Setter Property="Margin" Value="0,0,0,0"/>
                     <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Template" Value="{StaticResource Gray}"/>
                 </Style>
+                
             </ListView.ItemContainerStyle>
 
             <ListView.ItemTemplate>
@@ -104,7 +104,7 @@
                         </Grid.RowDefinitions>
 
                         <Border BorderBrush="#707070" BorderThickness="0,0,0,1" Margin="0" Padding="0">
-                            <StackPanel x:Name="ListViewPlan" Style="{DynamicResource ListViewDefault}" Grid.Column="1" Margin="0" MouseLeftButtonUp="ListViewPlan_MouseLeftButtonUp">
+                            <StackPanel x:Name="ListViewPlan" Grid.Column="1" Margin="0" MouseLeftButtonUp="ListViewPlan_MouseLeftButtonUp">
                                 <TextBlock Text="{Binding PlanName}" FontFamily="Poppins" Margin="0" FontWeight="Bold" Padding="5,4,0,0" Foreground="Black" FontSize="14"/>
                                 <TextBlock Text="{Binding NextBackup}" FontFamily="Poppins" Margin="0" FontWeight="Normal" Padding="5,0,0,0" Foreground="Black" FontSize="13"/>
                             </StackPanel>
@@ -113,6 +113,12 @@
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
+
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem x:Name="DeletePlan" Header="Delete plan"  Click="DeletePlan_Click"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
 
         </ListView>
 

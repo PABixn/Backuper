@@ -28,6 +28,13 @@ namespace DBManager
             conn.Execute($"REPLACE INTO Plans Values ('{planName}', '{planDescription}', '{sourceFoldersString}', '{destinationFoldersString}', '{allowedDaysString}', '{interval}')");
         }
 
+        public static void DeletePlan(string planName)
+        {
+            SQLiteConnection conn = new SQLiteConnection(Connect());
+
+            conn.Execute($"DELETE FROM Plans WHERE planName='{planName}'");
+        }
+
         public static void SaveBackup(string planName, DateTime startDate, DateTime endDate)
         {
             SQLiteConnection conn = new SQLiteConnection(Connect());

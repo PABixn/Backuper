@@ -69,6 +69,8 @@ namespace Main.Pages
             NextBackupTextBlock.Text = "Next backup: " + GetNextBackupDate(DB.GetLastDate(planName), interval).ToLocalTime().ToString(CultureInfo.InstalledUICulture);
 
             HideAll.Visibility = Visibility.Hidden;
+
+            //PlansList.SelectedItem = PlansList.Items.Cast<Plan>().Where(x => x.PlanName == planName).FirstOrDefault();
         }
 
         private void UpdateUI(DateTime lastDate, TimeSpan interval, bool executing)
@@ -140,11 +142,21 @@ namespace Main.Pages
                 }
             }
         }
+
+        private void DeletePlan_Click(object sender, RoutedEventArgs e)
+        {
+            if(PlansList.SelectedItem != null)
+            {
+                System.Windows.MessageBox.Show(((Plan)PlansList.SelectedItem).PlanName);
+                //DB.DeletePlan(((Plan)PlansList.SelectedItem).PlanName);
+            }
+        }
     }
 
     class Plan
     {
         public string PlanName { get; set; }
         public string NextBackup { get; set; }
+
     }
 }
