@@ -21,7 +21,7 @@ using BackupManager;
 
 namespace Main
 {
-    public class CreateNewPlan
+    public class CreateNewPlan : Page
     {
         public string planName, planDescription;
         public List<string> sourceFolders, destinationFolders;

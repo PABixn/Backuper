@@ -24,6 +24,8 @@ namespace Main.Pages
 {
     public partial class MenuPage : System.Windows.Controls.Page
     {
+        System.Timers.Timer timer;
+
         public MenuPage()
         {
             InitializeComponent();
@@ -36,7 +38,7 @@ namespace Main.Pages
             for (int i = 0; i < plans.Count; i++)
                 PlansList.Items.Add(new Plan { PlanName = plans[i], NextBackup = "Next backup: " + GetNextBackupDate(lastDates[i], intervals[i]).ToLocalTime().ToString(CultureInfo.InstalledUICulture) });
 
-            System.Timers.Timer timer = new System.Timers.Timer(1000);
+            timer = new System.Timers.Timer(1000);
 
             timer.Elapsed += timer_Elapsed;
             timer.Enabled = true;
@@ -89,12 +91,15 @@ namespace Main.Pages
 
                 (List<string> plans, List<DateTime> lastDates, List<TimeSpan> intervals) = DB.GetAll();
 
-                for (int i = 0; i < plans.Count; i++)
-                {
-                    if (PlanHandler.IsExecuting[plans[i]] == true)
-                        PlansList.Items[i] = new Plan { PlanName = plans[i], NextBackup = "Executing" };
-                    else
-                        PlansList.Items[i] = new Plan { PlanName = plans[i], NextBackup = "Next backup: " + GetNextBackupDate(lastDates[i], intervals[i]).ToLocalTime().ToString(CultureInfo.InstalledUICulture) };
+            for (int i = 0; i < plans.Count; i++)
+            {
+                if (PlansList.Items.Count-1 < i)
+                    PlansList.Items.Add(new Plan { PlanName = plans[i], NextBackup = "Next backup: " + GetNextBackupDate(lastDates[i], intervals[i]).ToLocalTime().ToString(CultureInfo.InstalledUICulture) });
+
+                if (PlanHandler.IsExecuting.ContainsKey(plans[i]) && PlanHandler.IsExecuting[plans[i]] == true)
+                    PlansList.Items[i] = new Plan { PlanName = plans[i], NextBackup = "Executing" };
+                else
+                    PlansList.Items[i] = new Plan { PlanName = plans[i], NextBackup = "Next backup: " + GetNextBackupDate(lastDates[i], intervals[i]).ToLocalTime().ToString(CultureInfo.InstalledUICulture) };
                 }
             });
         }
@@ -103,10 +108,13 @@ namespace Main.Pages
         {
             this.Dispatcher.Invoke(() =>
             {
-                string planName = ((Plan)PlansList.SelectedItem)?.PlanName ?? ((Plan)PlansList.Items[0]).PlanName;
+                if(PlansList.Items.Count > 0)
+                {
+                    string planName = ((Plan)PlansList.SelectedItem)?.PlanName ?? ((Plan)PlansList.Items[0]).PlanName;
 
-                if(PlanHandler.IsExecuting.ContainsKey(planName))
-                    UpdateUI(DB.GetLastDate(planName), DB.GetInterval(planName), PlanHandler.IsExecuting[planName]);
+                    if (PlanHandler.IsExecuting.ContainsKey(planName))
+                        UpdateUI(DB.GetLastDate(planName), DB.GetInterval(planName), PlanHandler.IsExecuting[planName]);
+                }
             });
         }
 
@@ -122,6 +130,7 @@ namespace Main.Pages
 
         private void NewPlan_Click(object sender, RoutedEventArgs e)
         {
+            ClearPages();
             this.NavigationService.Navigate(new CreateNewPlanPage());
         }
 
@@ -147,9 +156,30 @@ namespace Main.Pages
         {
             if(PlansList.SelectedItem != null)
             {
-                System.Windows.MessageBox.Show(((Plan)PlansList.SelectedItem).PlanName);
-                //DB.DeletePlan(((Plan)PlansList.SelectedItem).PlanName);
+                DB.DeletePlan(((Plan)PlansList.SelectedItem).PlanName);
+                PlanHandler.IsExecuting.Remove(((Plan)PlansList.SelectedItem).PlanName);
+                PlansList.Items.Remove(PlansList.SelectedItem);
+                if(PlansList.Items.Count <= 0)
+                {
+                    PlanHandler.StopHandling();
+                    timer.Stop();
+                    this.NavigationService.Navigate(new CreateNewPlanPage());
+                }
+                else
+                {
+                    LoadPlanData(((Plan)PlansList.Items[0]).PlanName); 
+                }
             }
+        }
+
+        private void ClearPages()
+        {
+            CreateNewPlanPage.planName = "";
+            CreateNewPlanPage.planDescription = "";
+            AddSourceFoldersPage.sourceFolders.Clear();
+            AddDestinationFoldersPage.destinationFolders.Clear();
+            ScheduleBackupsPage.allowedDays.Clear();
+            ScheduleBackupsPage.interval = new TimeSpan(1, 0, 0, 0);
         }
     }
 
